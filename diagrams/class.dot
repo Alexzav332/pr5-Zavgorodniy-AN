@@ -1,0 +1,8 @@
+digraph classes {
+  nodesep=0.6; ranksep=1.0;
+  node [shape=record, fontname="DejaVu Sans", fontsize=16, style=filled, fillcolor="#e8f0f8", color="#3b5ea6"];
+  edge [fontname="DejaVu Sans", fontsize=13];
+  an [label="{TimesheetAnalyzer|- DAYS_COUNT : int = 7\l- MIN_HOURS : int = 0\l- MAX_HOURS : int = 16\l- OVERTIME_THRESHOLD : int = 8\l- WEEKLY_NORM : int = 40\l- FIRST_WEEKEND_INDEX : int = 5\l|+ parseHours(String) int[]\l+ total(int[]) int\l+ average(int[]) double\l+ overtimeDays(int[]) int\l+ weeklyOvertime(int[]) int\l+ addWeekendHours(int[]) int\l- parseValue(String, int) int\l- checkHours(int[]) void\l}"];
+  sc [label="{SelfCheck|- DATA_FILE : String\l|+ main(String[]) void\l- runUnitChecks() boolean\l- runDataDriven() boolean\l- runInteractive() void\l}"];
+  sc -> an [style=dashed, arrowhead=vee, label=" использует"];
+}

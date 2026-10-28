@@ -1,0 +1,26 @@
+digraph activity {
+  rankdir=TB; nodesep=0.6; ranksep=0.6;
+  node [fontname="DejaVu Sans", fontsize=14, shape=box, style="rounded,filled", fillcolor="#e8f0f8", color="#3b5ea6"];
+  edge [fontname="DejaVu Sans", fontsize=13, color="#444444"];
+
+  start [label="Начало", shape=ellipse, fillcolor="#e2f0d9", color="#548235"];
+  n1 [label="Получить строку часов", shape=parallelogram, fillcolor="#e4e0ee", color="#7030a0"];
+  n2 [label="Разделить строку на элементы:\nsplit(\";\", -1)"];
+  n3 [label="Ровно 7 значений?", shape=diamond, style=filled, fillcolor="#fff2cc", color="#bf9000"];
+  n4 [label="Для каждого из 7 элементов: проверить regex\n^(0|[1-9][0-9]*)$ и диапазон 0 ≤ v ≤ 16,\nпреобразовать в int"];
+  n5 [label="Все элементы корректны?", shape=diamond, style=filled, fillcolor="#fff2cc", color="#bf9000"];
+  n6 [label="Вычислить сумму, среднее,\nдни с переработкой и недельную переработку"];
+  n6b [label="Сложить часы выходных\n(позиции 6 и 7)"];
+  n7 [label="Сформировать отчёт: total, average (2 знака),\novertimeDays, weeklyOvertime, addWeekendHours"];
+  n8 [label="Сформировать сообщение об ошибке"];
+  end [label="Завершение", shape=ellipse, fillcolor="#fce4d6", color="#c55a11"];
+
+  start -> n1 -> n2 -> n3;
+  n3 -> n4 [label=" да"];
+  n3 -> n8 [label=" нет"];
+  n4 -> n5;
+  n5 -> n6 [label=" да"];
+  n5 -> n8 [label=" нет"];
+  n6 -> n6b -> n7 -> end;
+  n8 -> end;
+}
